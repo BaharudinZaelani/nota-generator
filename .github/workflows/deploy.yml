@@ -1,0 +1,21 @@
+name: 🚀 Deploy via FTP
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Upload via FTP to YWI
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: ftp.bahardev.my.id
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./
+        server-dir: ./
