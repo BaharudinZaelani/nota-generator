@@ -3,15 +3,66 @@
 @section('title', 'Nota')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 print:shadow-none">
-    <div class="flex justify-between items-start mb-6">
+<style>
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        .print-content,
+        .print-content * {
+            visibility: visible;
+        }
+
+        .print-content {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+
+        .no-print {
+            display: none !important;
+        }
+
+        body,
+        html {
+            height: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        body * {
+            visibility: hidden;
+        }
+
+        .print-content,
+        .print-content * {
+            visibility: visible;
+        }
+
+        .print-content {
+            height: max-content;
+            page-break-after: always;
+            break-after: page;
+        }
+    }
+</style>
+<div class="print-content mx-auto bg-white rounded-lg shadow-md p-6 print:shadow-none">
+    <h3 class="text-2xl font-bold text-gray-800">Nota Transaksi</h3>
+    <div class="flex justify-between items-center mb-6">
         <div>
-            <h3 class="text-2xl font-bold text-gray-800">Nota Transaksi</h3>
-            <div class="mt-4 space-y-2">
-                <p class="text-gray-600">Nama: <span
-                        class="font-semibold text-gray-800">{{ $transaksi->nama_pelanggan }}</span></p>
-                <p class="text-gray-600">Tanggal: <span
-                        class="font-semibold text-gray-800">{{ $transaksi->tanggal }}</span></p>
+            <div>
+                <table class="w-full text-sm text-gray-600">
+                    <tr>
+                        <td class="text-gray-600 pe-4 text-start">Nama Pelanggan</td>
+                        <td class="font-semibold text-gray-800">: {{ $transaksi->nama_pelanggan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-gray-600 pe-4 text-start">Tanggal</td>
+                        <td class="font-semibold text-gray-800">: {{ $transaksi->tanggal }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="bg-gray-100 p-3 rounded-lg">
